@@ -46,10 +46,10 @@ import Grid from '@mui/material/Grid';
   }, [])
 
 
-  const OUTCOME = ['Alice wins', 'Bob wins', 'Timeout'];
+  const OUTCOME = ['Proposal 1 wins', 'Proposal 2 wins', 'Timeout'];
 
 
-  const handleYes = async (e) => {
+  const handleVote = async (e) => {
     e.preventDefault()
   
     const ctcPollster = acc.contract(backend);
@@ -75,7 +75,7 @@ import Grid from '@mui/material/Grid';
         getVote: (() => vote),
         voterWas: ((voterAddr) => {
           if ( stdlib.addressEq(voterAddr, accVoter) ) {
-            console.log(`${Who} voted: ${vote ? 'Alice' : 'Bob'}`);
+            console.log(`${Who} voted: ${vote ? 'Proposal 1' : 'Proposal 2'}`);
             voted = true;
           } } ),
         shouldVote: (() => ! voted) });
@@ -84,7 +84,7 @@ import Grid from '@mui/material/Grid';
 
   }
 
-  const handleNo = async (e) => {
+  const handleBeginVoting = async (e) => {
     
     e.preventDefault()
 
@@ -106,8 +106,8 @@ import Grid from '@mui/material/Grid';
       getParams: () => ({
         ticketPrice: stdlib.parseCurrency(5),
         deadline: 10,
-        aliceAddr: acc,
-        bobAddr: acc,
+        prop1Addr: acc,
+        prop2Addr: acc,
       }),
     })
 
@@ -126,11 +126,9 @@ import Grid from '@mui/material/Grid';
         <Typography variant="h5" component="div">
           View the proposals
         </Typography>
-        {/* <Typography variant="body2">
-        </Typography> */}
       </CardContent>
       <CardActions style={{ display:'flex', justifyContent:'center' }}>
-        <Button onClick={handleNo} size="small">Begin voting</Button>
+        <Button onClick={handleBeginVoting} size="small">Begin voting</Button>
       </CardActions>
     </Card>
       </Grid>
@@ -140,15 +138,12 @@ import Grid from '@mui/material/Grid';
         <Typography variant="h5" component="div">
           Proposal 1
         </Typography>
-        {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
-        </Typography> */}
         <Typography variant="body2">
           Use the money to stake more Algorand
         </Typography>
       </CardContent>
       <CardActions>
-        <Button onClick={handleYes} size="small">Vote for this proposal</Button>
+        <Button onClick={handleVote} size="small">Vote for this proposal</Button>
       </CardActions>
     </Card>
       </Grid>
@@ -158,15 +153,12 @@ import Grid from '@mui/material/Grid';
         <Typography variant="h5" component="div">
           Proposal 2
         </Typography>
-        {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
-        </Typography> */}
         <Typography variant="body2">
           Use the money to stake more ETH
         </Typography>
       </CardContent>
       <CardActions>
-        <Button onClick={handleYes} size="small">Vote for this proposal</Button>
+        <Button onClick={handleVote} size="small">Vote for this proposal</Button>
       </CardActions>
     </Card>
       </Grid>

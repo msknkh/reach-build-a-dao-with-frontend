@@ -19,7 +19,7 @@ import * as backend from './build/index.main.mjs';
   const ctcPollster = accPollster.contract(backend);
   const ctcInfo = ctcPollster.getInfo();
 
-  const OUTCOME = ['Alice wins', 'Bob wins', 'Timeout'];
+  const OUTCOME = ['Proposal 1 wins', 'Proposal 2 wins', 'Timeout'];
   const Common = (Who) => ({
       showOutcome: (outcome, forA, forB) => {
         if ( outcome == 2 ) {
