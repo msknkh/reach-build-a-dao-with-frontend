@@ -1,0 +1,1 @@
+export const ctcInfoStr = 714821900   //points to algo mainnet
